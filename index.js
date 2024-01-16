@@ -7,7 +7,7 @@ const moment = require("moment-timezone");
 require("dotenv").config();
 
 const app = express();
-const port = 5000;
+const port = 5005;
 
 const URL = process.env.MONGO_URL;
 
@@ -58,6 +58,7 @@ app.post("/find", async (req, res) => {
 	);
 	console.log("Start of day:", startOfDay.toISOString());
 	console.log("End of day:", endOfDay.toISOString());
+	console.log("date - ", startOfDay.toDate())
 	try {
 		const result = await Note.find({
 			createdAt: { $gte: startOfDay.toDate(), $lt: endOfDay.toDate() },
