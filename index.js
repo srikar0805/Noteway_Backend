@@ -58,7 +58,6 @@ app.post("/find", async (req, res) => {
 	);
 	console.log("Start of day:", startOfDay.toISOString());
 	console.log("End of day:", endOfDay.toISOString());
-	console.log("date - ", startOfDay.toDate())
 	try {
 		const result = await Note.find({
 			createdAt: { $gte: startOfDay.toDate(), $lt: endOfDay.toDate() },
