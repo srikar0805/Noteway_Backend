@@ -46,8 +46,9 @@ app.post("/new", async (req, res) => {
 
 app.post("/find", async (req, res) => {
 	console.log("in");
-	const { date } = req.body;
+	var { date } = req.body;
 	console.log(req.body);
+	date=date.substring(0,10);
 	// const istDate = moment.tz(date, "Asia/Kolkata");
 	// const istDateFormatted = istDate.format("YYYY-MM-DD");
 	// const startOfDay = moment.tz(
