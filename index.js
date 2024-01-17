@@ -45,22 +45,27 @@ app.post("/new", async (req, res) => {
 });
 
 app.post("/find", async (req, res) => {
+	console.log("in");
 	const { date } = req.body;
-	const istDate = moment.tz(date, "Asia/Kolkata");
-	const istDateFormatted = istDate.format("YYYY-MM-DD");
-	const startOfDay = moment.tz(
-		`${istDateFormatted} 00:00:00`,
-		"Asia/Kolkata"
-	);
-	const endOfDay = moment.tz(
-		`${istDateFormatted} 23:59:59.999`,
-		"Asia/Kolkata"
-	);
-	console.log("Start of day:", startOfDay.toISOString());
-	console.log("End of day:", endOfDay.toISOString());
+	console.log(req.body);
+	// const istDate = moment.tz(date, "Asia/Kolkata");
+	// const istDateFormatted = istDate.format("YYYY-MM-DD");
+	// const startOfDay = moment.tz(
+	// 	`${istDateFormatted} 00:00:00`,
+	// 	"Asia/Kolkata"
+	// );
+	// const endOfDay = moment.tz(
+	// 	`${istDateFormatted} 23:59:59.999`,
+	// 	"Asia/Kolkata"
+	// );
+	console.log(date);
+	const startOfDay=date+"T00:00:00.000Z";
+    const endOfDay=date+"T23:59:59.999Z";
+ 	console.log("Start of day:", startOfDay);
+	console.log("End of day:", endOfDay);
 	try {
 		const result = await Note.find({
-			createdAt: { $gte: startOfDay.toDate(), $lt: endOfDay.toDate() },
+			createdAt: { $gte: startOfDay, $lt: endOfDay },
 		});
 		console.log(result);
 		res.json(result);
